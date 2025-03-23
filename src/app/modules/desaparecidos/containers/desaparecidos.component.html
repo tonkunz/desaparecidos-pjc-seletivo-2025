@@ -1,4 +1,4 @@
-<div class="max-w-7xl w-full mx-auto">
+<div class="max-w-7xl w-full mx-auto my-8">
   @if (isLoadingList) {
     <div class="flex flex-col justify-center items-center">
       <mat-progress-spinner></mat-progress-spinner>
@@ -6,10 +6,18 @@
       <span>Por favor, aguarde...</span>
     </div>
   } @else {
-    <div class="grid grid-cols-4 gap-4">
-      @for (desaparecido of desaparecidosList; track desaparecido.id) {
-        <desaparecido-card [desaparecido]="desaparecido"></desaparecido-card>
-      }
+    <div class="flex flex-col gap-4">
+      <filter-form
+        [initValues]="facade.params"
+        (onChangeFilters)="handleChangeFilters($event)"
+      ></filter-form>
+
+      <!-- Listagem dos Desaparecidos-->
+      <div class="grid grid-cols-4 gap-4">
+        @for (desaparecido of desaparecidosList; track desaparecido.id) {
+          <desaparecido-card [desaparecido]="desaparecido"></desaparecido-card>
+        }
+      </div>
     </div>
-  }
+    }
 </div>

@@ -51,3 +51,11 @@ export interface ISort {
   sorted: boolean;
   empty: boolean;
 }
+
+export interface IApiFilters {
+  nome: string;
+  faixaIdadeInicial: number;
+  faixaIdadeFinal: number;
+  sexo: 'MASCULINO' | 'FEMININO' | '';
+  status: 'DESAPARECIDO' | 'LOCALIZADO';
+}

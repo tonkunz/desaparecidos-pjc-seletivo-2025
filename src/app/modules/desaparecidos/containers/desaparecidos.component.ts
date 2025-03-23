@@ -1,21 +1,23 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject, takeUntil } from 'rxjs';
+import { FilterFormComponent } from '../components/filter-form/filter-form.component';
 import { DesaparecidoCardComponent } from '../components/individuo-card/desaparecido-card.component';
 import { DesaparecidosFacade } from '../desaparecidos.facade';
-import { IDesaparecido } from '../desaparecidos.types';
+import { IApiFilters, IDesaparecido } from '../desaparecidos.types';
 
 @Component({
   selector: 'app-desaparecidos',
   templateUrl: './desaparecidos.component.html',
   imports: [
     MatProgressSpinnerModule,
-    DesaparecidoCardComponent
+    DesaparecidoCardComponent,
+    FilterFormComponent,
   ]
 })
 export class DesaparecidosComponent implements OnInit, OnDestroy {
   // Dependency Injection
-  private _facade = inject(DesaparecidosFacade);
+  facade = inject(DesaparecidosFacade);
 
   desaparecidosList: IDesaparecido[] = [];
   isLoadingList: boolean = false;
@@ -25,19 +27,23 @@ export class DesaparecidosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Subscrições no estado do Facade
-    this._facade.desaparecidosList$
+    this.facade.desaparecidosList$
       .pipe(takeUntil(this._unsubscribeAll$))
       .subscribe((value: IDesaparecido[]) => {
         this.desaparecidosList = value;
       });
 
-    this._facade.isLoadingDesaparecidosList$
+    this.facade.isLoadingDesaparecidosList$
       .pipe(takeUntil(this._unsubscribeAll$))
       .subscribe((value: boolean) => {
         this.isLoadingList = value;
       });
 
-    this._facade.load();
+    this.facade.load();
+  }
+
+  handleChangeFilters(formFilters: IApiFilters) {
+    this.facade.filterList(formFilters);
   }
 
   ngOnDestroy(): void {
