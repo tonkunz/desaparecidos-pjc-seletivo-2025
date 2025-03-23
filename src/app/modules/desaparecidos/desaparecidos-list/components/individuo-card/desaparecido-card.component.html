@@ -1,4 +1,7 @@
-<div class="bg-white border border-gray-200 shadow-sm rounded-xl flex flex-col">
+<div
+  class="bg-white border border-gray-200 shadow-sm rounded-xl flex flex-col"
+  [routerLink]="['desaparecido', `${desaparecido().id}`]"
+>
   <div class="w-full h-40 bg-gray-100 rounded-t-xl">
     <img
       [src]="desaparecido().urlFoto"

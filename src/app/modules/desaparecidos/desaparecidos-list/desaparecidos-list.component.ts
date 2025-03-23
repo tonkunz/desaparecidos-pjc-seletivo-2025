@@ -1,14 +1,14 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject, takeUntil } from 'rxjs';
-import { FilterFormComponent } from '../components/filter-form/filter-form.component';
-import { DesaparecidoCardComponent } from '../components/individuo-card/desaparecido-card.component';
-import { DesaparecidosFacade } from '../desaparecidos.facade';
-import { IApiFilters, IDesaparecido } from '../desaparecidos.types';
+import { DesaparecidosFacade } from './desaparecidos.facade';
+import { IApiFilters, IDesaparecido } from './desaparecidos.types';
+import { FilterFormComponent } from './components/filter-form/filter-form.component';
+import { DesaparecidoCardComponent } from './components/individuo-card/desaparecido-card.component';
 
 @Component({
-  selector: 'app-desaparecidos',
-  templateUrl: './desaparecidos.component.html',
+  selector: 'desaparecidos-list',
+  templateUrl: './desaparecidos-list.component.html',
   imports: [
     MatProgressSpinnerModule,
     DesaparecidoCardComponent,

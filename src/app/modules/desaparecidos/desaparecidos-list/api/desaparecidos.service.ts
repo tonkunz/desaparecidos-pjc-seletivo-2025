@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
 import { IListDesaparecidosResponse } from '../desaparecidos.types';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,6 @@ export class DesaparecidosAPIService {
       {
         params
       }
-    );
-  }
-
-  getById(id: number) {
-    return this._http.get(
-      `${environment.apiURL}/v1/pessoas/${id}`
     );
   }
 }
