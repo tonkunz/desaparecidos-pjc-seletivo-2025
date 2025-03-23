@@ -18,6 +18,16 @@
           <desaparecido-card [desaparecido]="desaparecido"></desaparecido-card>
         }
       </div>
+      <mat-paginator
+        [length]="pagination.totalElements"
+        [pageIndex]="pagination.pagina"
+        [pageSize]="pagination.porPagina"
+        [pageSizeOptions]="[16, 40, 100]"
+        showFirstLastButtons
+        aria-label="Selecione uma Página"
+        (page)="handlePageEvent($event)"
+      >
+      </mat-paginator>
     </div>
     }
 </div>

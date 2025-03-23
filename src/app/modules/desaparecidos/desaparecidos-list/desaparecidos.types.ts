@@ -52,6 +52,13 @@ export interface ISort {
   empty: boolean;
 }
 
+export interface IPaginacao {
+  pagina: number;
+  porPagina: number;
+  totalElements: number;
+  totalPages: number;
+}
+
 export interface IApiFilters {
   nome: string;
   faixaIdadeInicial: number;

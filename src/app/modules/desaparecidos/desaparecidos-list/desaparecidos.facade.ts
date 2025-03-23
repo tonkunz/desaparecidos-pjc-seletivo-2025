@@ -1,8 +1,9 @@
+import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DesaparecidosAPIService } from './api/desaparecidos.service';
-import { IApiFilters, IDesaparecido, IListDesaparecidosResponse, IPageable } from './desaparecidos.types';
-import { HttpParams } from '@angular/common/http';
+import { IApiFilters, IDesaparecido, IListDesaparecidosResponse, IPaginacao } from './desaparecidos.types';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,11 @@ export class DesaparecidosFacade {
   //
   // State
   private _desaparecidosList$ = new BehaviorSubject<IDesaparecido[]>([]);
-  private _pagination$ = new BehaviorSubject<IPageable>({
-    pageNumber: 0,
-    pageSize: 16,
-    sort: {
-      unsorted: false,
-      sorted: true,
-      empty: false
-    },
-    offset: 0,
-    unpaged: false,
-    paged: true
+  private _pagination$ = new BehaviorSubject<IPaginacao>({
+    pagina: 0,
+    porPagina: 16,
+    totalElements: 0,
+    totalPages: 0,
   });
   private _params$ = new BehaviorSubject<IApiFilters>({
     faixaIdadeFinal: 0,
@@ -40,8 +35,8 @@ export class DesaparecidosFacade {
     const params = new HttpParams({
       fromObject: {
         ...this.params,
-        pagina: this._pagination$.value.pageNumber,
-        porPagina: this._pagination$.value.pageSize,
+        pagina: this._pagination$.value.pagina,
+        porPagina: this._pagination$.value.porPagina,
       }
     })
 
@@ -53,6 +48,12 @@ export class DesaparecidosFacade {
     this._api.getAll(params).subscribe({
       next: (response: IListDesaparecidosResponse) => {
         this.desaparecidosList = response.content;
+        this.pagination = {
+          pagina: response.number,
+          porPagina: response.numberOfElements,
+          totalElements: response.totalElements,
+          totalPages: response.totalPages,
+        }
         this.isLoadingDesaparecidosList = false;
       },
       error: () => {
@@ -67,20 +68,40 @@ export class DesaparecidosFacade {
     // Reseta paginação para página 0
     this._pagination$.next({
       ...this._pagination$.value,
-      pageNumber: 0
+      pagina: 0
     })
 
     // Cria novo httpParams
     const newParams = new HttpParams({
       fromObject: {
         ...this.params,
-        pagina: this._pagination$.value.pageNumber,
-        porPagina: this._pagination$.value.pageSize,
+        pagina: this._pagination$.value.pagina,
+        porPagina: this._pagination$.value.porPagina,
       }
     })
 
     // Efetua filtragem
     this.getList(newParams);
+  }
+
+  handlePagination(pageEvent: PageEvent) {
+    const { pageSize, pageIndex } = pageEvent;
+
+    this.pagination = {
+      ...this.pagination,
+      pagina: pageIndex,
+      porPagina: pageSize,
+    };
+
+    const params = new HttpParams({
+      fromObject: {
+        ...this.params,
+        pagina: this._pagination$.value.pagina,
+        porPagina: this._pagination$.value.porPagina,
+      }
+    })
+
+    this.getList(params);
   }
 
   //
@@ -98,7 +119,7 @@ export class DesaparecidosFacade {
     return this._pagination$.asObservable();
   }
 
-  set pagination(value: IPageable) {
+  set pagination(value: IPaginacao) {
     this._pagination$.next(value);
   }
 
