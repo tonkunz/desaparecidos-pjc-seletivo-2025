@@ -1,0 +1,15 @@
+<div class="bg-white border border-gray-200 shadow-sm rounded-xl flex flex-col">
+  <div class="w-full h-40 bg-gray-100 rounded-t-xl">
+    <img
+      [src]="desaparecido().urlFoto"
+      [alt]="'foto de ' + desaparecido().nome"
+      class="object-cover"
+    >
+  </div>
+
+  <div class="p-4 flex flex-col">
+    <h2>
+      {{ desaparecido().nome}}
+    </h2>
+  </div>
+</div>

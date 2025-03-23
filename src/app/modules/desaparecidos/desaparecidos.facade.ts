@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DesaparecidosAPIService } from './api/desaparecidos.service';
-import { IPageable } from './desaparecidos.types';
+import { IDesaparecido, IListDesaparecidosResponse, IPageable } from './desaparecidos.types';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DesaparecidosFacade {
   //
   //
   // State
-  private _desaparecidosList$ = new BehaviorSubject([]);
+  private _desaparecidosList$ = new BehaviorSubject<IDesaparecido[]>([]);
   private _pagination$ = new BehaviorSubject<IPageable>({
     pageNumber: 0,
     pageSize: 10,
@@ -31,8 +31,8 @@ export class DesaparecidosFacade {
   load() {
     this.isLoadingDesaparecidosList = true;
     this._api.getAll().subscribe({
-      next: (response) => {
-        this.desaparecidosList = response;
+      next: (response: IListDesaparecidosResponse) => {
+        this.desaparecidosList = response.content;
         this.isLoadingDesaparecidosList = false;
       },
       error: () => {
