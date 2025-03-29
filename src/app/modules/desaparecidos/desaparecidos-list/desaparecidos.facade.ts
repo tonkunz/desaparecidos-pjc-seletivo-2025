@@ -68,8 +68,9 @@ export class DesaparecidosFacade {
     // Reseta paginação para página 0
     this._pagination$.next({
       ...this._pagination$.value,
+      porPagina: this.pagination?.porPagina || 16,
       pagina: 0
-    })
+    });
 
     // Cria novo httpParams
     const newParams = new HttpParams({

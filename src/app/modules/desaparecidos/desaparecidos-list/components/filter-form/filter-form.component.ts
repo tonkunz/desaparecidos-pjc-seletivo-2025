@@ -43,7 +43,7 @@ export class FilterFormComponent implements OnInit {
   }
 
   handleCleanFilters() {
-    this.onChangeFilters.emit({
+    this.filterForm.patchValue({
       nome: '',
       faixaIdadeInicial: 0,
       faixaIdadeFinal: 0,
