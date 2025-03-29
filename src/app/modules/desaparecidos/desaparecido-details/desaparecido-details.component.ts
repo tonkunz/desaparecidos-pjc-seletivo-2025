@@ -64,15 +64,15 @@ export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
     const cartazObjetos = {
       PDF: {
         label: 'Baixar cartaz em PDF',
-        icon: 'icons/pdf_icon.svg'
+        icon: 'icons/pdf-icon.png'
       },
       JPG: {
         label: 'Baixar cartaz em JPG',
-        icon: 'icons/jpg_icon.svg'
+        icon: 'icons/jpg-icon.png'
       },
       INSTA: {
         label: 'Baixar cartaz para o Instagram',
-        icon: 'icons/insta_icon.svg'
+        icon: 'icons/instagram-icon.png'
       }
     };
 

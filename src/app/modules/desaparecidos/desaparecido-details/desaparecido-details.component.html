@@ -6,19 +6,19 @@
       <span class="sm:text-xl text-gray-600">Por favor, aguarde...</span>
     </div>
   } @else {
-    <a mat-stroked-button class="mb-4 w-60" routerLink="/">
+    <a mat-stroked-button class="mb-4 w-60 mx-2" routerLink="/">
       <mat-icon>arrow_back</mat-icon> Voltar para Listagem
     </a>
-    <div class="flex gap-4 border border-gray-300 rounded-xl shadow-md">
+    <div class="flex flex-col md:flex-row gap-4 border border-gray-300 rounded-xl shadow-md mx-2">
       <!-- Foto container -->
       <img
         [src]="desaparecido.urlFoto || 'img/sem-foto.svg'"
         [alt]="'foto de ' + desaparecido.nome"
-        class="object-cover h-full  rounded-l-xl max-w-sm"
+        class="object-cover mx-auto h-100 md:h-full  md:rounded-l-xl md:max-w-sm"
       >
 
       <!-- Information Container -->
-      <div class="flex-1 flex flex-col py-4">
+      <div class="flex-1 flex flex-col px-2 py-4">
         <div class="flex">
           <span
             class="text-xl text-white px-2 rounded-sm"
@@ -27,10 +27,10 @@
             {{ flagLocalizado ? 'LOCALIZADO' : 'DESAPARECIDO' }}
           </span>
         </div>
-        <h1 class="text-3xl font-semibold mt-2">
+        <h1 class="text-xl md:text-3xl font-semibold mt-2">
           {{ desaparecido.nome }}
         </h1>
-        <span class="text-xl text-gray-600">
+        <span class="md:text-xl text-gray-600">
           {{ desaparecido.sexo | titlecase }},
           {{
               desaparecido.idade
@@ -94,8 +94,9 @@
           <a
             [href]="generateWhatsAppLink()"
             target="_blank"
-            class="border rounded-xl "
+            class="border rounded-xl border-gray-300 shadow-md flex gap-2 items-center p-2 hover:bg-gray-50 hover:shadow-xl"
           >
+            <img src="icons/whatsapp-icon.png" alt="" class="w-7 h-7">
             <span class="text-xs">Compartilhe pelo Whatsapp</span>
           </a>
 
@@ -103,9 +104,14 @@
             <a
               [href]="cartaz.urlCartaz"
               target="_blank"
-              class="border rounded-xl "
+              class="border rounded-xl border-gray-300 shadow-md flex gap-2 items-center p-2 hover:bg-gray-50 hover:shadow-xl"
             >
-              <span class="text-xs">
+             <img
+              [src]="handleCartaz(cartaz).icon"
+              [alt]="handleCartaz(cartaz).label"
+              class="w-7 h-7"
+            >
+              <span class="text-xs leading-4">
                 {{ handleCartaz(cartaz).label }}
               </span>
             </a>
