@@ -2,17 +2,36 @@
   class="bg-white border border-gray-200 shadow-sm rounded-xl flex flex-col h-full"
   [routerLink]="['desaparecido', `${desaparecido().id}`]"
 >
-  <div class="w-full h-40 bg-gray-100 rounded-t-xl">
+  <div class="w-full bg-gray-100 rounded-t-xl">
     <img
-      [src]="desaparecido().urlFoto"
+      [src]="desaparecido().urlFoto || 'img/sem-foto.svg'"
       [alt]="'foto de ' + desaparecido().nome"
-      class="object-cover"
+      class="object-cover w-full h-80 rounded-t-xl"
     >
   </div>
 
-  <div class="p-4 flex flex-col">
-    <h2>
+  <div class="p-4 flex flex-col text-center">
+    <h2 class="font-semibold text-gray-800">
       {{ desaparecido().nome}}
     </h2>
+    <span class="text-sm text-gray-600">
+      {{ desaparecido().sexo | titlecase }},
+      {{
+          desaparecido().idade
+            ? desaparecido().idade + ' anos'
+            : 'Idade não informada'
+      }}
+    </span>
+    <div class="border-b border-gray-200 my-3"></div>
+    <span class="text-sm">
+      Data: {{
+        desaparecido().ultimaOcorrencia.dtDesaparecimento | date: "dd/MM/yyyy 'às' HH:mm"
+      }},
+    </span>
+    <span class="text-sm">
+      Local: {{
+        desaparecido().ultimaOcorrencia.localDesaparecimentoConcat
+      }}
+    </span>
   </div>
 </div>
