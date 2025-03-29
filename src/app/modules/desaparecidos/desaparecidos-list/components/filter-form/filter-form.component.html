@@ -1,7 +1,12 @@
 <form
   [formGroup]="filterForm"
-  class="grid grid-cols-2 gap-4 p-4 border border-gray-200 rounded-xl"
+  class="grid grid-cols-2 gap-4 p-4 border border-gray-200 rounded-xl shadow-xl"
 >
+  <div class="w-full col-span-2 border-b border-gray-300 pb-3 mb-1">
+    <h2 class="text-2xl md:text-3xl font-semibold">Faça sua Busca</h2>
+    <span class="text-sm md:text-lg text-gray-600">Aqui estão alguns parâmetros para você filtrar sua consulta</span>
+  </div>
+
   <mat-form-field class="col-span-2">
     <mat-label>Nome:</mat-label>
     <input type="text" matInput formControlName="nome">
@@ -51,6 +56,7 @@
     color="danger"
     (click)="handleCleanFilters()"
   >
+    <mat-icon>close</mat-icon>
     Limpar Consulta
   </button>
 
@@ -60,6 +66,7 @@
     color="primary"
     (click)="handleFilter()"
   >
+    <mat-icon>search</mat-icon>
     Consultar
   </button>
 </form>

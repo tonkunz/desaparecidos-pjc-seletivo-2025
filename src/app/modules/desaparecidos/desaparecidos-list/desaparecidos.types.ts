@@ -32,6 +32,11 @@ export interface IUltimaOcorrencia {
   ocoId: number;
 }
 
+export interface ICartaz {
+  tipoCartaz: string;
+  urlCartaz: string
+}
+
 export interface IOcorrenciaEntrevDesapDTO {
   informacao?: string;
   vestimentasDesaparecido: string;
