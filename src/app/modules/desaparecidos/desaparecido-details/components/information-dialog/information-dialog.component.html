@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>
+  <div class="font-semibold -mt-8">
+    Enviar Informações
+  </div>
+</h2>
+
+<mat-dialog-content>
+  <div class="flex flex-col mb-4">
+    <h3>Preencha abaixo o formulário caso possua informações e arquivos que ajudem no caso de desaparecimento de {{ data.nome }}</h3>
+  </div>
+
+  <form [formGroup]="form" class="flex flex-col">
+    <mat-form-field class="w-full">
+      <mat-label>Informações</mat-label>
+      <textarea matInput formControlName="informacao"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Data:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="data">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Sessão de anexos -->
+    <app-file-upload
+      (filesSelected)="handleFiles($event)"
+    ></app-file-upload>
+  </form>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button mat-stroked-button mat-dialog-close="">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid || isLoading"
+    (click)="sendInformation()"
+  >
+    <mat-icon>send</mat-icon>
+    Enviar Informações
+  </button>
+</mat-dialog-actions>

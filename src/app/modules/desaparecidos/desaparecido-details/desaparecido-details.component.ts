@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ICartaz } from '../desaparecidos-list/desaparecidos.types';
 import { environment } from '../../../../environments/environment.development';
+import { MatDialog } from '@angular/material/dialog';
+import { InformationDialogComponent } from './components/information-dialog/information-dialog.component';
 
 @Component({
   selector: 'desaparecido-details',
@@ -26,6 +28,7 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
   facade = inject(DesaparecidoDetailsFacadeService);
+  private _dialog = inject(MatDialog);
   private _route = inject(ActivatedRoute);
 
   // State
@@ -57,7 +60,13 @@ export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
   }
 
   sendInfoDialog() {
-    // TODO: Abrir dialog de envio de informações
+    this._dialog.open(InformationDialogComponent, {
+      maxWidth: '600px',
+      width: '100%',
+      data: {
+        ...this.desaparecido
+      }
+    });
   }
 
   handleCartaz(cartaz: ICartaz) {

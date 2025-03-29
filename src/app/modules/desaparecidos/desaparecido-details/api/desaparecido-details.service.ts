@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDesaparecidoDetails } from '../desaparecido-details.types';
@@ -15,5 +15,20 @@ export class DesaparecidoDetailsAPIService {
     return this._http.get<IDesaparecidoDetails>(
       `${environment.apiURL}/v1/pessoas/${id}`
     );
+  }
+
+  sendInformation(files: File[], params: HttpParams) {
+    const form = new FormData();
+    files.forEach((file) => {
+      form.append('files', file);
+    });
+
+    return this._http.post(`${environment.apiURL}/v1/ocorrencias/informacoes-desaparecido`,
+      form,
+      {
+        params,
+      }
+    );
+
   }
 }
