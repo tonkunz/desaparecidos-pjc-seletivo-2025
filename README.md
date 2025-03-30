@@ -3,6 +3,8 @@
 
 
 Bem-vindo ao projeto **Desaparecidos SEPLAG-MT 2025**, desenvolvido como parte do processo seletivo da Secretaria de Planejamento Estratégico de Mato Grosso (SEPLAG). Este é um frontend moderno e funcional construído em **Angular**, que consome uma API de pessoas desaparecidas, oferecendo uma interface intuitiva e eficiente para visualização e interação com os dados. O objetivo foi criar uma solução robusta, escalável e visualmente agradável, utilizando boas práticas de desenvolvimento e arquitetura.
+Você pode conferir o projeto pelo link: https://tonkunz.github.io/desaparecidos-pjc-seletivo-2025/
+
 
 ![Tela Inicial do Projeto](./screenshots/app-screen.png)
 
@@ -21,7 +23,7 @@ Aqui estão as principais tecnologias empregadas no projeto, com um breve resumo
 
 ## Como Rodar o Projeto 🚀
 
-Existem **três maneiras** de executar este projeto. Escolha a que melhor se adapta ao seu ambiente e siga os passos abaixo:
+Um build do projeto está disponível no link: https://tonkunz.github.io/desaparecidos-pjc-seletivo-2025/. Porém, caso deseje, existem **três maneiras** de executar este projeto. Escolha a que melhor se adapta ao seu ambiente e siga os passos abaixo:
 
 ### 1. Via GitHub + Node Local
 Clone o repositório e rode localmente com Node.js. Certifique-se de ter a versão do Node acimda da 20.
