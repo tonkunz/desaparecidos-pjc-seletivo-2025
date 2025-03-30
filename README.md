@@ -1,59 +1,104 @@
-# DesaparecidosPjcSeletivo2025
+# FrontEnd Senior - Teste Prático - Desaparecidos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
 
-## Development server
 
-To start a local development server, run:
+Bem-vindo ao projeto **Desaparecidos SEPLAG-MT 2025**, desenvolvido como parte do processo seletivo da Secretaria de Planejamento Estratégico de Mato Grosso (SEPLAG). Este é um frontend moderno e funcional construído em **Angular**, que consome uma API de pessoas desaparecidas, oferecendo uma interface intuitiva e eficiente para visualização e interação com os dados. O objetivo foi criar uma solução robusta, escalável e visualmente agradável, utilizando boas práticas de desenvolvimento e arquitetura.
 
-```bash
-ng serve
-```
+(./screenshots/app-screen.png)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tecnologias Utilizadas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Aqui estão as principais tecnologias empregadas no projeto, com um breve resumo de cada uma:
 
-```bash
-ng generate component component-name
-```
+- **Angular (Versão 19)**: Framework poderoso para construção de aplicações web single-page (SPA). Foi usado para estruturar o frontend de forma modular e reativa, garantindo uma experiência fluida ao usuário.
+- **Angular Material (Versão 19)**: Biblioteca de componentes UI baseada no Material Design. Adiciona elementos visuais pré-construídos e responsivos, como botões, tabelas e formulários, acelerando o desenvolvimento e melhorando a usabilidade.
+- **Tailwind CSS (Versão 4)**: Framework de CSS utilitário que permite estilização rápida e personalizada diretamente no HTML, trazendo flexibilidade e consistência ao design da aplicação.
+- **Node.js (Versão 22+)**: Ambiente de execução utilizado para rodar o projeto localmente, gerenciar dependências via npm e suportar o desenvolvimento e build da aplicação.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Como Rodar o Projeto 🚀
 
-## Building
+Existem **três maneiras** de executar este projeto. Escolha a que melhor se adapta ao seu ambiente e siga os passos abaixo:
 
-To build the project run:
+### 1. Via GitHub + Node Local
+Clone o repositório e rode localmente com Node.js. Certifique-se de ter a versão do Node acimda da 20.
 
-```bash
-ng build
-```
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/tonkunz/desaparecidos-pjc-seletivo-2025.git
+   ```
+2. Entre na pasta do projeto:
+   ```bash
+   cd desaparecidos-pjc-seletivo-2025
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   ng serve
+   ```
+5. Abra o navegador em `http://localhost:4200`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 2. Via Docker (Build Local)
+Baixe o repositório e construa a imagem Docker localmente.
 
-## Running unit tests
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/tonkunz/desaparecidos-pjc-seletivo-2025.git
+   ```
+2. Entre na pasta do projeto:
+   ```bash
+   cd desaparecidos-pjc-seletivo-2025
+   ```
+3. Construa a imagem Docker:
+   ```bash
+   docker build -t desaparecidos-seplag-2025 .
+   ```
+4. Rode o container:
+   ```bash
+   docker run -p 8080:80 desaparecidos-seplag-2025
+   ```
+5. Acesse `http://localhost:8080` no navegador.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 3. Via DockerHub (Imagem Pré-Construída)
+Puxe a imagem diretamente do DockerHub e execute.
 
-```bash
-ng test
-```
+1. Puxe a imagem do DockerHub:
+   ```bash
+   docker pull tonkunz/desaparecidos-seplag-2025
+   ```
+2. Rode o container:
+   ```bash
+   docker run -p 8080:80 tonkunz/desaparecidos-seplag-2025
+   ```
+3. Acesse `http://localhost:8080` no navegador.
 
-## Running end-to-end tests
+> **Nota**: Certifique-se de que o Docker está instalado e rodando em sua máquina para as opções 2 e 3.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Arquitetura do Projeto
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+O projeto foi estruturado com foco em boas práticas de desenvolvimento Angular, garantindo modularidade, reusabilidade e facilidade de manutenção. Aqui estão os principais conceitos arquiteturais utilizados:
 
-## Additional Resources
+- **Facade Pattern**: Implementei o padrão Facade para centralizar a lógica de comunicação com a API de pessoas desaparecidas. Isso simplifica o acesso aos serviços, abstraindo a complexidade e fornecendo uma interface clara para os componentes.
+- **BehaviorSubject**: Utilizei o `BehaviorSubject` do RxJS para gerenciar o estado reativo da aplicação. Ele permite que os componentes sejam notificados de mudanças nos dados em tempo real, como atualizações na lista de desaparecidos, mantendo a UI sempre sincronizada.
+- **Modularidade**: O projeto foi dividido em módulos Angular, separando funcionalidades específicas (ex.: listagem, detalhes, filtros) para facilitar a escalabilidade e o trabalho em equipe.
+- **Serviços**: Criei serviços injetáveis para encapsular a lógica de negócios e as chamadas HTTP à API, promovendo a separação de responsabilidades.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+A combinação dessas abordagens resulta em uma aplicação robusta, performática e preparada para evoluções futuras.
+
+---
+
+## Contribuições
+
+Sinta-se à vontade para abrir issues ou enviar pull requests no repositório. Este projeto foi criado com muito esforço e dedicação para o processo seletivo da SEPLAG-MT, e qualquer feedback é bem-vindo!
+
+---
+
+Feito por Everton Henrique Oliveira Kunz para o processo seletivo SEPLAG-MT 2025.
