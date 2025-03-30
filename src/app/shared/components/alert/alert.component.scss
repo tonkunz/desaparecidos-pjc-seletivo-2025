@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  .alert-success-snackbar {
+    @include mat.snack-bar-overrides((
+      container-color: rgb(0, 207, 52),
+      supporting-text-color: white,
+    ));
+  }
+
+  .alert-error-snackbar {
+    @include mat.snack-bar-overrides((
+      container-color: rgb(206, 0, 51),
+      supporting-text-color: white,
+    ));
+  }
+}

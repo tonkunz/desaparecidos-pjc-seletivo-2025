@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -12,10 +13,11 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { IDesaparecidoDetails } from '../../desaparecido-details.types';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { DesaparecidoDetailsAPIService } from '../../api/desaparecido-details.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AlertService } from '../../../../../shared/components/alert/alert.service';
 import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
+import { DesaparecidoDetailsAPIService } from '../../api/desaparecido-details.service';
+import { IDesaparecidoDetails } from '../../desaparecido-details.types';
 
 @Component({
   selector: 'app-information-dialog',
@@ -32,14 +34,16 @@ import { FileUploadComponent } from '../../../../../shared/components/file-uploa
     MatDialogContent,
     MatDialogTitle,
     MatDatepickerModule,
-    FileUploadComponent
-  ]
+    FileUploadComponent,
+    MatSnackBarModule
+  ],
 })
 export class InformationDialogComponent implements OnInit {
   readonly data = inject<IDesaparecidoDetails>(MAT_DIALOG_DATA);
   readonly dialogRef = inject(MatDialogRef<InformationDialogComponent>);
   private _api = inject(DesaparecidoDetailsAPIService);
   private _fb = inject(FormBuilder);
+  private _alert = inject(AlertService);
 
   form!: FormGroup;
   isLoading = false;
@@ -77,9 +81,11 @@ export class InformationDialogComponent implements OnInit {
       next: () => {
         this.isLoading = false;
         this.dialogRef.close();
+        this._alert.success('Informação enviada com sucesso!');
       },
-      error: () => {
+      error: (err) => {
         this.isLoading = false;
+        this._alert.error(err?.message || 'Ocorreu um erro desconhecido com a requisição. Por favor tente mais tarde...')
       }
     });
   }
