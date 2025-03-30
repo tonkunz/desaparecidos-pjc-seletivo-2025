@@ -50,7 +50,7 @@ export class DesaparecidosFacade {
         this.desaparecidosList = response.content;
         this.pagination = {
           pagina: response.number,
-          porPagina: response.numberOfElements,
+          porPagina: response.size,
           totalElements: response.totalElements,
           totalPages: response.totalPages,
         }
@@ -97,8 +97,8 @@ export class DesaparecidosFacade {
     const params = new HttpParams({
       fromObject: {
         ...this.params,
-        pagina: this._pagination$.value.pagina,
-        porPagina: this._pagination$.value.porPagina,
+        pagina: this.pagination.pagina,
+        porPagina: this.pagination.porPagina,
       }
     })
 
@@ -118,6 +118,10 @@ export class DesaparecidosFacade {
 
   get pagination$() {
     return this._pagination$.asObservable();
+  }
+
+  get pagination() {
+    return this._pagination$.value;
   }
 
   set pagination(value: IPaginacao) {
