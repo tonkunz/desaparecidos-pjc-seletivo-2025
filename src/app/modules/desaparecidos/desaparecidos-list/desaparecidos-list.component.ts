@@ -7,6 +7,7 @@ import { FilterFormComponent } from './components/filter-form/filter-form.compon
 import { DesaparecidoCardComponent } from './components/individuo-card/desaparecido-card.component';
 import { DesaparecidosFacade } from './desaparecidos.facade';
 import { IApiFilters, IPaginacao } from './desaparecidos.types';
+import { EstatisticasComponent } from '@shared/components/estatisticas/estatisticas.component';
 
 @Component({
   selector: 'desaparecidos-list',
@@ -15,7 +16,8 @@ import { IApiFilters, IPaginacao } from './desaparecidos.types';
     MatProgressSpinnerModule,
     DesaparecidoCardComponent,
     FilterFormComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    EstatisticasComponent
   ]
 })
 export class DesaparecidosComponent implements OnInit, OnDestroy {
