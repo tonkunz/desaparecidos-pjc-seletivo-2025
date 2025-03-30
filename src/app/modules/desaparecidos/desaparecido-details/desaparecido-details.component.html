@@ -1,4 +1,6 @@
 <div class="flex flex-col max-w-7xl mx-auto mt-4 lg:mt-8">
+
+  <!-- Tratamento de Loading -->
   @if (loading) {
     <div class="flex flex-col justify-center items-center">
       <mat-spinner></mat-spinner>
@@ -13,119 +15,121 @@
     </a>
 
     <!-- Container do conteúdo da página-->
-    <div class="flex gap-2">
-      <div class="flex-1 min-h-0 flex flex-col md:flex-row gap-4 border border-gray-300 rounded-xl shadow-md mx-2">
-        <!-- Foto container -->
-        <img
-          [src]="desaparecido.urlFoto || 'img/sem-foto.svg'"
-          [alt]="'foto de ' + desaparecido.nome"
-          class="object-cover mx-auto h-100 md:h-full  md:rounded-l-xl md:max-w-sm"
-        >
-
-        <!-- Information Container -->
-        <div class="flex-1 flex flex-col px-2 py-4">
-          <div class="flex">
-            <span
-              class="text-xl text-white px-2 rounded-sm"
-              [ngClass]="flagLocalizado ? 'bg-green-500' : 'bg-red-500'"
-            >
-              {{ flagLocalizado ? 'LOCALIZADO' : 'DESAPARECIDO' }}
-            </span>
-          </div>
-          <h1 class="text-xl md:text-3xl font-semibold mt-2">
-            {{ desaparecido.nome }}
-          </h1>
-          <span class="md:text-xl text-gray-600">
-            {{ desaparecido.sexo | titlecase }},
-            {{
-                desaparecido.idade
-                  ? desaparecido.idade + ' anos'
-                  : 'Idade não informada'
-            }}
-          </span>
-          <div class="border-b border-gray-300 my-4 w-32"></div>
-
-          <!-- Data -->
-          <div class="flex gap-2">
-            <strong>Data:</strong>
-            <p>
-              {{  desaparecido.ultimaOcorrencia.dtDesaparecimento | date: "dd/MM/yyyy 'às' HH:mm" }}
-            </p>
-          </div>
-
-          <!-- Local -->
-          <p>
-            <strong>Local:</strong>
-            {{  desaparecido.ultimaOcorrencia.localDesaparecimentoConcat }}
-          </p>
-
-          <!-- Vestimenta -->
-          <p>
-            <strong>Vestimentas:</strong>
-            {{  desaparecido.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido || 'Não informado' }}
-          </p>
-
-          <!-- Informações Adicionais -->
-          <p>
-            <strong>Informações Adicionais:</strong>
-            {{  desaparecido.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.informacao || 'Sem informações adicionais' }}
-          </p>
-
-          @if (!flagLocalizado) {
-            <div class="text-red-500 font-semibold text-xl">
-              {{ calculateTimeDesaparecido(desaparecido.ultimaOcorrencia.dtDesaparecimento) }}
-            </div>
-          }
-
-          <button
-            mat-stroked-button
-            color="primary"
-            (click)="sendInfoDialog()"
-            class="mt-2 w-60"
+    @if (desaparecido) {
+      <div class="flex gap-2">
+        <div class="flex-1 min-h-0 flex flex-col md:flex-row gap-4 border border-gray-300 rounded-xl shadow-md mx-2">
+          <!-- Foto container -->
+          <img
+            [src]="desaparecido.urlFoto || 'img/sem-foto.svg'"
+            [alt]="'foto de ' + desaparecido.nome"
+            class="object-cover mx-auto h-100 md:h-full  md:rounded-l-xl md:max-w-sm"
           >
-            <mat-icon>person_search</mat-icon>
-            Possui Informações?
-          </button>
 
-          <!-- Cartazes-->
-          <h3 class="font-semibold mt-4">Compartilhe</h3>
-          <div class="grid grid-cols-2  gap-2 xl:grid-cols-3 max-w-sm xl:max-w-md">
-            <a
-              [href]="generateWhatsAppLink()"
-              target="_blank"
-              class="border rounded-xl border-gray-300 shadow-md flex gap-2 items-center p-2 hover:bg-gray-50 hover:shadow-xl"
+          <!-- Information Container -->
+          <div class="flex-1 flex flex-col px-2 py-4">
+            <div class="flex">
+              <span
+                class="text-xl text-white px-2 rounded-sm"
+                [ngClass]="flagLocalizado ? 'bg-green-500' : 'bg-red-500'"
+              >
+                {{ flagLocalizado ? 'LOCALIZADO' : 'DESAPARECIDO' }}
+              </span>
+            </div>
+            <h1 class="text-xl md:text-3xl font-semibold mt-2">
+              {{ desaparecido.nome }}
+            </h1>
+            <span class="md:text-xl text-gray-600">
+              {{ desaparecido.sexo | titlecase }},
+              {{
+                  desaparecido.idade
+                    ? desaparecido.idade + ' anos'
+                    : 'Idade não informada'
+              }}
+            </span>
+            <div class="border-b border-gray-300 my-4 w-32"></div>
+
+            <!-- Data -->
+            <div class="flex gap-2">
+              <strong>Data:</strong>
+              <p>
+                {{  desaparecido.ultimaOcorrencia.dtDesaparecimento | date: "dd/MM/yyyy 'às' HH:mm" }}
+              </p>
+            </div>
+
+            <!-- Local -->
+            <p>
+              <strong>Local:</strong>
+              {{  desaparecido.ultimaOcorrencia.localDesaparecimentoConcat }}
+            </p>
+
+            <!-- Vestimenta -->
+            <p>
+              <strong>Vestimentas:</strong>
+              {{  desaparecido.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido || 'Não informado' }}
+            </p>
+
+            <!-- Informações Adicionais -->
+            <p>
+              <strong>Informações Adicionais:</strong>
+              {{  desaparecido.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.informacao || 'Sem informações adicionais' }}
+            </p>
+
+            @if (!flagLocalizado) {
+              <div class="text-red-500 font-semibold text-xl">
+                {{ calculateTimeDesaparecido(desaparecido.ultimaOcorrencia.dtDesaparecimento) }}
+              </div>
+            }
+
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="sendInfoDialog()"
+              class="mt-2 w-60"
             >
-              <img src="icons/whatsapp-icon.png" alt="" class="w-7 h-7">
-              <span class="text-xs">Compartilhe pelo Whatsapp</span>
-            </a>
+              <mat-icon>person_search</mat-icon>
+              Possui Informações?
+            </button>
 
-            @for(cartaz of desaparecido.ultimaOcorrencia.listaCartaz; track cartaz) {
+            <!-- Cartazes-->
+            <h3 class="font-semibold mt-4">Compartilhe</h3>
+            <div class="grid grid-cols-2  gap-2 xl:grid-cols-3 max-w-sm xl:max-w-md">
               <a
-                [href]="cartaz.urlCartaz"
+                [href]="generateWhatsAppLink()"
                 target="_blank"
                 class="border rounded-xl border-gray-300 shadow-md flex gap-2 items-center p-2 hover:bg-gray-50 hover:shadow-xl"
               >
-               <img
-                [src]="handleCartaz(cartaz).icon"
-                [alt]="handleCartaz(cartaz).label"
-                class="w-7 h-7"
-              >
-                <span class="text-xs leading-4">
-                  {{ handleCartaz(cartaz).label }}
-                </span>
+                <img src="icons/whatsapp-icon.png" alt="" class="w-7 h-7">
+                <span class="text-xs">Compartilhe pelo Whatsapp</span>
               </a>
-            }
+
+              @for(cartaz of desaparecido.ultimaOcorrencia.listaCartaz; track cartaz) {
+                <a
+                  [href]="cartaz.urlCartaz"
+                  target="_blank"
+                  class="border rounded-xl border-gray-300 shadow-md flex gap-2 items-center p-2 hover:bg-gray-50 hover:shadow-xl"
+                >
+                 <img
+                  [src]="handleCartaz(cartaz).icon"
+                  [alt]="handleCartaz(cartaz).label"
+                  class="w-7 h-7"
+                >
+                  <span class="text-xs leading-4">
+                    {{ handleCartaz(cartaz).label }}
+                  </span>
+                </a>
+              }
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="hidden lg:block">
-        <h3 class="font-semibold text-xl text-center">
-          Outros Desaparecidos
-        </h3>
-        <random-desaparecido></random-desaparecido>
+        <div class="hidden lg:block">
+          <h3 class="font-semibold text-xl text-center">
+            Outros Desaparecidos
+          </h3>
+          <random-desaparecido></random-desaparecido>
+        </div>
       </div>
-    </div>
+    }
+
   }
 </div>
-|

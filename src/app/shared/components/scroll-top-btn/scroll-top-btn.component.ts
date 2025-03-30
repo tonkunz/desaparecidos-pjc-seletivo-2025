@@ -25,7 +25,6 @@ export class ScrollTopBtnComponent {
   onWindowScroll() {
     const listagemSection = document.getElementById('listagem');
     if (listagemSection) {
-      console.log('lsitagem teste;')
       const listagemRect = listagemSection.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;

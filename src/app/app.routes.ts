@@ -3,6 +3,15 @@ import { PageLayoutComponent } from './shared/components/page-layout/page-layout
 
 export const routes: Routes = [
   {
+    path: 'not-found',
+    component: PageLayoutComponent,
+    children: [{
+      path: '',
+      loadComponent: () => import('./modules/404/404-not-found.component')
+        .then(m => m.NotFoundComponent)
+    }]
+  },
+  {
     path: '',
     component: PageLayoutComponent,
     children: [
@@ -21,5 +30,11 @@ export const routes: Routes = [
           .then(m => m.DesaparecidoDetailsComponent)
       }
     ]
+  },
+  // Adiciona a rota curinga para redirecionar para 'not-found'
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'full',
   },
 ];

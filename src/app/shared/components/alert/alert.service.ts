@@ -15,8 +15,6 @@ export class AlertService {
   };
 
   success(message: string) {
-    console.log('teste');
-
     this._snackBar.openFromComponent(AlertComponent, {
       ...this.defaultConfiguration,
       data: {
