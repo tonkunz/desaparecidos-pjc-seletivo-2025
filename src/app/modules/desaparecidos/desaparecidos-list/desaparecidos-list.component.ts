@@ -8,6 +8,7 @@ import { DesaparecidoCardComponent } from './components/individuo-card/desaparec
 import { DesaparecidosFacade } from './desaparecidos.facade';
 import { IApiFilters, IPaginacao } from './desaparecidos.types';
 import { EstatisticasComponent } from '@shared/components/estatisticas/estatisticas.component';
+import { ScrollTopBtnComponent } from '@shared/components/scroll-top-btn/scroll-top-btn.component';
 
 @Component({
   selector: 'desaparecidos-list',
@@ -17,7 +18,8 @@ import { EstatisticasComponent } from '@shared/components/estatisticas/estatisti
     DesaparecidoCardComponent,
     FilterFormComponent,
     MatPaginatorModule,
-    EstatisticasComponent
+    EstatisticasComponent,
+    ScrollTopBtnComponent
   ]
 })
 export class DesaparecidosComponent implements OnInit, OnDestroy {

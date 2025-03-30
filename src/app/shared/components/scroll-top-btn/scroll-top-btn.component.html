@@ -1,0 +1,12 @@
+@if (!showScrollToTopButton) {
+  <div class="fixed right-0 top-175">
+    <button
+      type="button"
+      class="bg-blue-500 text-white p-2 rounded-l-xl flex justify-center items-center hover:bg-blue-700 cursor-pointer ease-in duration-75"
+      (click)="scrollToTop()"
+      aria-label="Voltar ao topo da página"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
+}
