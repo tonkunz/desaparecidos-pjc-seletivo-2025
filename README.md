@@ -4,7 +4,7 @@
 
 Bem-vindo ao projeto **Desaparecidos SEPLAG-MT 2025**, desenvolvido como parte do processo seletivo da Secretaria de Planejamento Estratégico de Mato Grosso (SEPLAG). Este é um frontend moderno e funcional construído em **Angular**, que consome uma API de pessoas desaparecidas, oferecendo uma interface intuitiva e eficiente para visualização e interação com os dados. O objetivo foi criar uma solução robusta, escalável e visualmente agradável, utilizando boas práticas de desenvolvimento e arquitetura.
 
-(./screenshots/app-screen.png)
+![Tela Inicial do Projeto](./screenshots/app-screen.png)
 
 ---
 
@@ -83,6 +83,8 @@ Puxe a imagem diretamente do DockerHub e execute.
 ---
 
 ## Arquitetura do Projeto
+
+![Tela Inicial do Projeto](./screenshots/facade-screen.png)
 
 O projeto foi estruturado com foco em boas práticas de desenvolvimento Angular, garantindo modularidade, reusabilidade e facilidade de manutenção. Aqui estão os principais conceitos arquiteturais utilizados:
 
