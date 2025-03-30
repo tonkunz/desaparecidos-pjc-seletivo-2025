@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AlertService } from '../../../../../shared/components/alert/alert.service';
 import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
 import { DesaparecidoDetailsAPIService } from '../../api/desaparecido-details.service';
-import { IDesaparecidoDetails } from '../../desaparecido-details.types';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({

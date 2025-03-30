@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IListDesaparecidosResponse } from '../desaparecidos.types';
-import { environment } from '../../../../../environments/environment.development';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'

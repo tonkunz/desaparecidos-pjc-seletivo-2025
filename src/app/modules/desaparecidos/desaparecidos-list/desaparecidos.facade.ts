@@ -2,8 +2,9 @@ import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DesaparecidosAPIService } from './api/desaparecidos.service';
-import { IApiFilters, IDesaparecido, IListDesaparecidosResponse, IPaginacao } from './desaparecidos.types';
+import { IApiFilters, IListDesaparecidosResponse, IPaginacao } from './desaparecidos.types';
 import { PageEvent } from '@angular/material/paginator';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class DesaparecidosFacade {
   //
   //
   // State
-  private _desaparecidosList$ = new BehaviorSubject<IDesaparecido[]>([]);
+  private _desaparecidosList$ = new BehaviorSubject<IDesaparecidoDetails[]>([]);
   private _pagination$ = new BehaviorSubject<IPaginacao>({
     pagina: 0,
     porPagina: 16,
@@ -112,7 +113,7 @@ export class DesaparecidosFacade {
     return this._desaparecidosList$.asObservable();
   }
 
-  set desaparecidosList(value: IDesaparecido[]) {
+  set desaparecidosList(value: IDesaparecidoDetails[]) {
     this._desaparecidosList$.next(value);
   }
 

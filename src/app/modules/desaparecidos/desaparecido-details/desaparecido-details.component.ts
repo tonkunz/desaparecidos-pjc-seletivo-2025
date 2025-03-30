@@ -1,16 +1,17 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DesaparecidoDetailsFacadeService } from './desaparecido-details.facade';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IDesaparecidoDetails } from './desaparecido-details.types';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 import { Subject, takeUntil } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ICartaz } from '../desaparecidos-list/desaparecidos.types';
-import { environment } from '../../../../environments/environment.development';
+import { ICartaz } from '@shared/types/desaparecido-details.types';
+import { environment } from '@env/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { InformationDialogComponent } from './components/information-dialog/information-dialog.component';
+import { RandomDesaparecidoComponent } from '@shared/components/random-desaparecido/random-desaparecido.component';
 
 @Component({
   selector: 'desaparecido-details',
@@ -23,7 +24,8 @@ import { InformationDialogComponent } from './components/information-dialog/info
     DatePipe,
     MatButtonModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    RandomDesaparecidoComponent
   ]
 })
 export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
@@ -41,9 +43,11 @@ export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
   private _unsubscribeAll$ = new Subject();
 
   ngOnInit(): void {
-    this.id = this._route.snapshot.paramMap.get('id');
-
-    this.facade.load(Number(this.id));
+   this._route.paramMap.pipe(takeUntil(this._unsubscribeAll$))
+    .subscribe((params) => {
+      this.id = params.get('id');
+      this.facade.load(Number(this.id));
+    });
 
     this.facade.isLoading$.pipe(takeUntil(this._unsubscribeAll$))
       .subscribe((isLoading: boolean) => {
@@ -54,7 +58,7 @@ export class DesaparecidoDetailsComponent implements OnInit, OnDestroy {
       .subscribe((desaparecido: IDesaparecidoDetails | null) => {
         if (desaparecido) {
           this.desaparecido = desaparecido;
-          this.flagLocalizado = desaparecido.ultimaOcorrencia.encontradoVivo;
+          this.flagLocalizado = !!desaparecido.ultimaOcorrencia.dataLocalizacao;
         }
       });
   }

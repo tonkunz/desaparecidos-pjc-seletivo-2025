@@ -14,11 +14,11 @@ export interface IUltimaOcorrencia {
   encontradoVivo: boolean;
   localDesaparecimentoConcat: string;
   ocorrenciaEntrevDesapDTO: IOcorrenciaEntrevDesapDTO;
-  listaCartaz: IListaCartaz[];
+  listaCartaz: ICartaz[];
   ocoId: number;
 }
 
-export interface IListaCartaz {
+export interface ICartaz {
   urlCartaz: string;
   tipoCartaz: 'PDF_DESAPARECIDO' | 'PDF_LOCALIZADO' | 'JPG_DESAPARECIDO' | 'JPG_LOCALIZADO' | 'INSTA_DESAPARECIDO' | 'INSTA_LOCALIZADO';
 }

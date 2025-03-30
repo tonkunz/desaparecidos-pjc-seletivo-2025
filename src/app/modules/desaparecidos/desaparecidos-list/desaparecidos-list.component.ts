@@ -1,11 +1,12 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 import { Subject, takeUntil } from 'rxjs';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
 import { DesaparecidoCardComponent } from './components/individuo-card/desaparecido-card.component';
 import { DesaparecidosFacade } from './desaparecidos.facade';
-import { IApiFilters, IDesaparecido, IPaginacao } from './desaparecidos.types';
+import { IApiFilters, IPaginacao } from './desaparecidos.types';
 
 @Component({
   selector: 'desaparecidos-list',
@@ -21,7 +22,7 @@ export class DesaparecidosComponent implements OnInit, OnDestroy {
   // Dependency Injection
   facade = inject(DesaparecidosFacade);
 
-  desaparecidosList: IDesaparecido[] = [];
+  desaparecidosList: IDesaparecidoDetails[] = [];
   pagination!: IPaginacao;
   isLoadingList: boolean = false;
 
@@ -32,7 +33,7 @@ export class DesaparecidosComponent implements OnInit, OnDestroy {
     // Subscrições no estado do Facade
     this.facade.desaparecidosList$
       .pipe(takeUntil(this._unsubscribeAll$))
-      .subscribe((value: IDesaparecido[]) => {
+      .subscribe((value: IDesaparecidoDetails[]) => {
         this.desaparecidosList = value;
       });
 

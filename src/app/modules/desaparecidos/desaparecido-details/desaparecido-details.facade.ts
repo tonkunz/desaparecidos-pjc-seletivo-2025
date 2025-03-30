@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { DesaparecidoDetailsAPIService } from './api/desaparecido-details.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IDesaparecidoDetails } from './desaparecido-details.types';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 
 @Injectable({
   providedIn: 'root'

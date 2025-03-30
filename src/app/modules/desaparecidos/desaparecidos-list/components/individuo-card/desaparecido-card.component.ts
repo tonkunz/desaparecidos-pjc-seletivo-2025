@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IDesaparecido } from '../../desaparecidos.types';
 import { DatePipe, TitleCasePipe } from '@angular/common';
+import { IDesaparecidoDetails } from '@shared/types/desaparecido-details.types';
 
 @Component({
   selector: 'desaparecido-card',
@@ -13,5 +13,5 @@ import { DatePipe, TitleCasePipe } from '@angular/common';
   ]
 })
 export class DesaparecidoCardComponent {
-  desaparecido = input.required<IDesaparecido>();
+  desaparecido = input.required<IDesaparecidoDetails>();
 }
