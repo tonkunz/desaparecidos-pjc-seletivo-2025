@@ -41,7 +41,13 @@
     [disabled]="form.invalid || isLoading"
     (click)="sendInformation()"
   >
-    <mat-icon>send</mat-icon>
-    Enviar Informações
+    <div class="flex gap-2">
+      @if (isLoading) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        <mat-icon>send</mat-icon>
+      }
+      <span>Enviar Informações</span>
+    </div>
   </button>
 </mat-dialog-actions>

@@ -13,11 +13,11 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AlertService } from '../../../../../shared/components/alert/alert.service';
 import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
 import { DesaparecidoDetailsAPIService } from '../../api/desaparecido-details.service';
 import { IDesaparecidoDetails } from '../../desaparecido-details.types';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-information-dialog',
@@ -35,7 +35,7 @@ import { IDesaparecidoDetails } from '../../desaparecido-details.types';
     MatDialogTitle,
     MatDatepickerModule,
     FileUploadComponent,
-    MatSnackBarModule
+    MatProgressSpinnerModule,
   ],
 })
 export class InformationDialogComponent implements OnInit {
