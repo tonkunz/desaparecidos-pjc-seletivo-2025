@@ -41,8 +41,13 @@ export class DesaparecidosComponent implements OnInit, OnDestroy {
 
     this.facade.isLoadingDesaparecidosList$
       .pipe(takeUntil(this._unsubscribeAll$))
-      .subscribe((value: boolean) => {
-        this.isLoadingList = value;
+      .subscribe((value) => {
+        const { isLoading, mode } = value;
+        this.isLoadingList = isLoading;
+
+        if (mode === 'filter' || mode === 'paging') {
+          this.scrollToListagem();
+        }
       });
 
     this.facade.pagination$
@@ -60,6 +65,12 @@ export class DesaparecidosComponent implements OnInit, OnDestroy {
 
   handlePageEvent(e: PageEvent) {
     this.facade.handlePagination(e);
+  }
+
+  scrollToListagem() {
+    const listagemSection = document.getElementById('listagem');
+    if (listagemSection)
+      listagemSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   ngOnDestroy(): void {

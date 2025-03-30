@@ -30,7 +30,13 @@ export class DesaparecidosFacade {
     sexo: '',
     status: 'DESAPARECIDO'
   });
-  private _isLoadingDesaparecidosList$ = new BehaviorSubject(false);
+  private _isLoadingDesaparecidosList$ = new BehaviorSubject<{
+    isLoading: boolean;
+    mode: 'initial'| 'paging'| 'filter'
+  }>({
+    isLoading: false,
+    mode: 'initial'
+  });
 
   load() {
     const params = new HttpParams({
@@ -44,8 +50,14 @@ export class DesaparecidosFacade {
     this.getList(params);
   }
 
-  getList(params = new HttpParams()) {
-    this.isLoadingDesaparecidosList = true;
+  getList(
+    params = new HttpParams(),
+    mode: 'initial'| 'paging'| 'filter'= 'initial'
+  ) {
+    this.isLoadingDesaparecidosList = {
+      isLoading: true,
+      mode,
+    };
     this._api.getAll(params).subscribe({
       next: (response: IListDesaparecidosResponse) => {
         this.desaparecidosList = response.content;
@@ -55,10 +67,17 @@ export class DesaparecidosFacade {
           totalElements: response.totalElements,
           totalPages: response.totalPages,
         }
-        this.isLoadingDesaparecidosList = false;
+        this.isLoadingDesaparecidosList = {
+          isLoading: false,
+          mode,
+        };
       },
       error: () => {
-        this.isLoadingDesaparecidosList = false;
+        // TODO: Alert
+        this.isLoadingDesaparecidosList = {
+          isLoading: false,
+          mode,
+        };
       }
     });
   }
@@ -83,7 +102,7 @@ export class DesaparecidosFacade {
     })
 
     // Efetua filtragem
-    this.getList(newParams);
+    this.getList(newParams, 'filter');
   }
 
   handlePagination(pageEvent: PageEvent) {
@@ -103,7 +122,7 @@ export class DesaparecidosFacade {
       }
     })
 
-    this.getList(params);
+    this.getList(params, 'paging');
   }
 
   //
@@ -145,7 +164,10 @@ export class DesaparecidosFacade {
     return this._isLoadingDesaparecidosList$.asObservable();
   }
 
-  set isLoadingDesaparecidosList(value: boolean) {
+  set isLoadingDesaparecidosList(value: {
+    isLoading: boolean;
+    mode: 'initial'| 'paging'| 'filter'
+  }) {
     this._isLoadingDesaparecidosList$.next(value);
   }
 }

@@ -1,56 +1,63 @@
 <app-estatisticas></app-estatisticas>
 
 <div class="max-w-7xl w-full mx-auto my-8 z-40">
-  @if (isLoadingList) {
-    <div class="flex flex-col justify-center items-center">
-      <mat-spinner></mat-spinner>
-      <h2 class="text-xl sm:text-3xl font-semibold mt-4">Carregando Dados!</h2>
-      <span class="sm:text-xl text-gray-600">Por favor, aguarde...</span>
+
+  <div class="flex flex-col gap-4 mx-2 sm:mx-4">
+
+    <!-- Formulário de Filtragem -->
+    <div class="flex gap-2">
+      <filter-form
+        class="flex-1"
+        [initValues]="facade.params"
+        (onChangeFilters)="handleChangeFilters($event)"
+      ></filter-form>
+
+      <div class="max-w-xs lg:max-w-sm w-full hidden md:block">
+        <img src="img/search-animation.svg" alt="">
+      </div>
     </div>
-  } @else {
-    <div class="flex flex-col gap-4 mx-2 sm:mx-4">
-      <div class="flex gap-2">
-        <filter-form
-          class="flex-1"
-          [initValues]="facade.params"
-          (onChangeFilters)="handleChangeFilters($event)"
-        ></filter-form>
 
-        <div class="max-w-xs lg:max-w-sm w-full hidden md:block">
-          <img src="img/search-animation.svg" alt="">
+    <!-- Listagem dos Desaparecidos-->
+    <h2 class="text-3xl mt-8 mb-2 font-semibold" id="listagem">
+      Listagem de Desaparecidos
+    </h2>
+
+    @if (isLoadingList) {
+      <div class="flex flex-col justify-center items-center my-6 p-4 border rounded-xl border-gray-300">
+        <mat-spinner></mat-spinner>
+        <h2 class="text-xl sm:text-3xl font-semibold mt-4">Carregando Dados!</h2>
+        <span class="sm:text-xl text-gray-600">Por favor, aguarde...</span>
+      </div>
+    }
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      @for (desaparecido of desaparecidosList; track desaparecido.id) {
+        <desaparecido-card [desaparecido]="desaparecido"></desaparecido-card>
+      } @empty {
+        <div class="flex flex-col items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4">
+          <img
+            src="img/list-empty-animation.svg"
+            alt="Ilustração de lista vazia"
+            class="max-w-md"
+          >
+          <h2 class="text-xl sm:text-3xl font-semibold -mt-8">Opss!</h2>
+          <span class="sm:text-xl text-gray-600">Infelizmente não encontramos nada ou algum problema ocorreu...</span>
         </div>
-      </div>
-
-      <!-- Listagem dos Desaparecidos-->
-       <h2 class="text-3xl mt-8 mb-2 font-semibold">Listagem de Desaparecidos</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        @for (desaparecido of desaparecidosList; track desaparecido.id) {
-          <desaparecido-card [desaparecido]="desaparecido"></desaparecido-card>
-        } @empty {
-          <div class="flex flex-col items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4">
-            <img
-              src="img/list-empty-animation.svg"
-              alt="Ilustração de lista vazia"
-              class="max-w-md"
-            >
-            <h2 class="text-xl sm:text-3xl font-semibold -mt-8">Opss!</h2>
-            <span class="sm:text-xl text-gray-600">Infelizmente não encontramos nada ou algum problema ocorreu...</span>
-          </div>
-        }
-      </div>
-
-      @if (desaparecidosList.length) {
-        <mat-paginator
-          [length]="pagination.totalElements"
-          [pageIndex]="pagination.pagina"
-          [pageSize]="pagination.porPagina"
-          [pageSizeOptions]="[16, 40, 100]"
-          showFirstLastButtons
-          aria-label="Selecione uma Página"
-          (page)="handlePageEvent($event)"
-        >
-        </mat-paginator>
       }
     </div>
+
+    @if (desaparecidosList.length) {
+      <mat-paginator
+        [length]="pagination.totalElements"
+        [pageIndex]="pagination.pagina"
+        [pageSize]="pagination.porPagina"
+        [pageSizeOptions]="[16, 40, 100]"
+        showFirstLastButtons
+        aria-label="Selecione uma Página"
+        (page)="handlePageEvent($event)"
+      >
+      </mat-paginator>
     }
+  </div>
+
 </div>
