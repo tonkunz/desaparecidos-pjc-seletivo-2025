@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: '',
+  apiURL: 'https://abitus-api.geia.vip',
   frontEndUrl: '',
 };
